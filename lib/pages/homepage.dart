@@ -66,28 +66,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[200],
-      appBar: AppBar(title: Text("TO DO YOU DO"), elevation: 0),
+      appBar: AppBar(
+        title: Text("TO DO YOU DO"),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+      ),
+      extendBodyBehindAppBar: true,
       floatingActionButton: FloatingActionButton(
         onPressed: () => createNewTask(),
         backgroundColor: Colors.green[500],
-        elevation: 0,
+        elevation: 4,
         child: Icon(Icons.add),
       ),
-      body: AnimatedList(
-        key: _listKey,
-        initialItemCount: db.todoList.length,
-        itemBuilder: (context, index, animation) {
-          return SizeTransition(
-            sizeFactor: animation,
-            child: TodoTile(
-              taskName: db.todoList[index][0],
-              taskCompleted: db.todoList[index][1],
-              onChanged: (value) => checkBoxChanged(value, index),
-              deleteTask: (context) => deleteTask(index),
-            ),
-          );
-        },
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.green[200]!, Colors.white],
+          ),
+        ),
+        child: SafeArea(
+          child: AnimatedList(
+            key: _listKey,
+            initialItemCount: db.todoList.length,
+            itemBuilder: (context, index, animation) {
+              return SizeTransition(
+                sizeFactor: animation,
+                child: TodoTile(
+                  taskName: db.todoList[index][0],
+                  taskCompleted: db.todoList[index][1],
+                  onChanged: (value) => checkBoxChanged(value, index),
+                  deleteTask: (context) => deleteTask(index),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

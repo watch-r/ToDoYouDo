@@ -16,10 +16,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        appBarTheme: AppBarTheme(backgroundColor: Colors.green, centerTitle: true),
-      ),
+      theme: ThemeData(appBarTheme: AppBarTheme(centerTitle: true)),
     );
   }
 }
