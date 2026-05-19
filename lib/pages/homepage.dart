@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todoyoudo/data/database.dart';
 
@@ -63,11 +64,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void deleteTask(int index) {
+    final removedItem = db.todoList[index];
+    setState(() {
+      db.todoList.removeAt(index);
+    });
+
+    _listKey.currentState?.removeItem(
+      index,
+      (context, animation) => TodoTile(
+        taskName: removedItem[0],
+        taskCompleted: removedItem[1],
+        onChanged: (value) {}, // No-op during deletion
+        deleteTask: (context) {}, // No-op during deletion
+      ),
+      duration: const Duration(milliseconds: 300),
+    );
+    db.updateData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TO DO YOU DO"),
+        title: Text(
+          "TO DO YOU DO",
+          style: GoogleFonts.playwriteAr(fontWeight: FontWeight(600), fontSize: 22),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
@@ -108,24 +131,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  void deleteTask(int index) {
-    final removedItem = db.todoList[index];
-    setState(() {
-      db.todoList.removeAt(index);
-    });
-
-    _listKey.currentState?.removeItem(
-      index,
-      (context, animation) => TodoTile(
-        taskName: removedItem[0],
-        taskCompleted: removedItem[1],
-        onChanged: (value) {}, // No-op during deletion
-        deleteTask: (context) {}, // No-op during deletion
-      ),
-      duration: const Duration(milliseconds: 300),
-    );
-    db.updateData();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todoyoudo/pages/homepage.dart';
 
@@ -16,7 +17,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme: ThemeData(appBarTheme: AppBarTheme(centerTitle: true)),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(centerTitle: true),
+        textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
     );
   }
 }
