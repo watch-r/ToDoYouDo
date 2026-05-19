@@ -1,0 +1,10 @@
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/tdyd.png" # Fallback for older Android versions and iOS
+  
+  # Adaptive Icon Configuration for Android 8.0+
+  adaptive_icon_background: "#A8C69B" # Use the light green color from your logo
+  adaptive_icon_foreground: "assets/icon/tdyd_foreground.png" # The logo with transparent BG
+  
+  min_sdk_android: 21
