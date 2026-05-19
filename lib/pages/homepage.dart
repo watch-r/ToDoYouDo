@@ -96,11 +96,15 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Colors.black,
       ),
       extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => createNewTask(),
         backgroundColor: Colors.green[500],
         elevation: 4,
-        child: Icon(Icons.add),
+        label: Text(
+          "Add Task",
+          style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        icon: Icon(Icons.add, color: Colors.white),
       ),
       body: Container(
         width: double.infinity,
