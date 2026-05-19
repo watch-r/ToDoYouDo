@@ -19,45 +19,55 @@ class TodoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion: StretchMotion(),
-          children: [
-            SlidableAction(
-              onPressed: deleteTask,
-              icon: Icons.delete,
-              backgroundColor: Colors.redAccent,
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ],
-        ),
-        child: Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
-          color: taskCompleted ? Colors.green[100] : Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              children: [
-                Checkbox(
-                  value: taskCompleted,
-                  onChanged: onChanged,
-                  activeColor: Colors.green[700],
-                ),
-                // taskname
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    taskName,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      decoration: taskCompleted ? TextDecoration.lineThrough : TextDecoration.none,
-                      color: taskCompleted ? Colors.grey : Colors.black87,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minHeight: 70,
+        ), // Minimum height for consistency, but allows growth
+        child: Slidable(
+          endActionPane: ActionPane(
+            motion: StretchMotion(),
+            children: [
+              SlidableAction(
+                onPressed: deleteTask,
+                icon: Icons.delete,
+                backgroundColor: Colors.redAccent,
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ],
+          ),
+          child: Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
+            color: taskCompleted ? Colors.green[100] : Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                crossAxisAlignment:
+                    CrossAxisAlignment.center, // Keeps checkbox centered as text grows
+                children: [
+                  Checkbox(
+                    value: taskCompleted,
+                    onChanged: onChanged,
+                    activeColor: Colors.green[700],
+                  ),
+                  // taskname
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      taskName,
+                      softWrap: true, // Allows text to wrap to the next line
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        decoration: taskCompleted
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                        color: taskCompleted ? Colors.grey : Colors.black87,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

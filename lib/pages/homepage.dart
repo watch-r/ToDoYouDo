@@ -133,21 +133,47 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Expanded(
-                child: AnimatedList(
-                  key: _listKey,
-                  initialItemCount: db.todoList.length,
-                  itemBuilder: (context, index, animation) {
-                    return SizeTransition(
-                      sizeFactor: animation,
-                      child: TodoTile(
-                        taskName: db.todoList[index][0],
-                        taskCompleted: db.todoList[index][1],
-                        onChanged: (value) => checkBoxChanged(value, index),
-                        deleteTask: (context) => deleteTask(index),
+                child: db.todoList.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.hourglass_empty,
+                              size: 90,
+                              color: Colors.grey,
+                            ), // Or a nice image
+                            SizedBox(height: 20),
+                            Text(
+                              "No tasks for today!",
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Text(
+                              "Tap the '+ Add Task' button to start your day.",
+                              style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      )
+                    : AnimatedList(
+                        key: _listKey,
+                        initialItemCount: db.todoList.length,
+                        itemBuilder: (context, index, animation) {
+                          return SizeTransition(
+                            sizeFactor: animation,
+                            child: TodoTile(
+                              taskName: db.todoList[index][0],
+                              taskCompleted: db.todoList[index][1],
+                              onChanged: (value) => checkBoxChanged(value, index),
+                              deleteTask: (context) => deleteTask(index),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ],
           ),
