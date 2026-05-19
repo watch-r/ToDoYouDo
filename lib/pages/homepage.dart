@@ -117,20 +117,39 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: SafeArea(
-          child: AnimatedList(
-            key: _listKey,
-            initialItemCount: db.todoList.length,
-            itemBuilder: (context, index, animation) {
-              return SizeTransition(
-                sizeFactor: animation,
-                child: TodoTile(
-                  taskName: db.todoList[index][0],
-                  taskCompleted: db.todoList[index][1],
-                  onChanged: (value) => checkBoxChanged(value, index),
-                  deleteTask: (context) => deleteTask(index),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsetsGeometry.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Manage your tasks for today",
+                      style: GoogleFonts.poppins(fontSize: 14, color: Colors.black54),
+                    ),
+                    SizedBox(height: 10),
+                  ],
                 ),
-              );
-            },
+              ),
+              Expanded(
+                child: AnimatedList(
+                  key: _listKey,
+                  initialItemCount: db.todoList.length,
+                  itemBuilder: (context, index, animation) {
+                    return SizeTransition(
+                      sizeFactor: animation,
+                      child: TodoTile(
+                        taskName: db.todoList[index][0],
+                        taskCompleted: db.todoList[index][1],
+                        onChanged: (value) => checkBoxChanged(value, index),
+                        deleteTask: (context) => deleteTask(index),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

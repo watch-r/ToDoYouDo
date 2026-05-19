@@ -18,7 +18,7 @@ class TodoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
       child: Slidable(
         endActionPane: ActionPane(
           motion: StretchMotion(),
@@ -27,7 +27,7 @@ class TodoTile extends StatelessWidget {
               onPressed: deleteTask,
               icon: Icons.delete,
               backgroundColor: Colors.redAccent,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(15),
             ),
           ],
         ),
@@ -36,7 +36,7 @@ class TodoTile extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
           color: taskCompleted ? Colors.green[100] : Colors.white,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
                 Checkbox(
@@ -45,7 +45,7 @@ class TodoTile extends StatelessWidget {
                   activeColor: Colors.green[700],
                 ),
                 // taskname
-                SizedBox(width: 10),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     taskName,
